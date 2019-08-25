@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artikel extends Model
 {
-    protected $fillable = ['judul', 'slug', 'rating', 'durasi', 'negara', 'konten', 'foto', 'kategori_id', 'user_id'];
+    protected $fillable = ['judul', 'slug', 'rating', 'durasi', 'embed', 'negara', 'konten', 'foto', 'kategori_id', 'user_id'];
     public $timestamps = true;
 
     public function tag()

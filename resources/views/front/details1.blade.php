@@ -42,7 +42,7 @@
 	<!-- details -->
 	<section class="section details">
 		<!-- details background -->
-		<div class="details__bg" data-bg="/assets/front/img/home/home__bg.jpg"></div>
+		<div class="details__bg" data-bg="{{ asset('assets/img/artikel/'.$artikel->foto)}}"></div>
 		<!-- end details background -->
 
 		<!-- details content -->
@@ -50,7 +50,7 @@
 			<div class="row">
 				<!-- title -->
 				<div class="col-12">
-					<h1 class="details__title">I Dream in Another Language</h1>
+					<h1 class="details__title">{{ $artikel->judul }}</h1>
 				</div>
 				<!-- end title -->
 
@@ -61,7 +61,7 @@
 							<!-- card cover -->
 							<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
 								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover.jpg" alt="">
+									<img src="{{ asset('assets/img/artikel/'.$artikel->foto)}}" alt="">
 								</div>
 							</div>
 							<!-- end card cover -->
@@ -70,24 +70,29 @@
 							<div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
 								<div class="card__content">
 									<div class="card__wrap">
-										<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+										<span class="card__rate"><i class="icon ion-ios-star"></i>{{ $artikel->rating }}</span>
 
 										<ul class="card__list">
-											<li>HD</li>
-											<li>16+</li>
+											
+											<li>{{ $artikel->kategori->nama}}</li>
 										</ul>
 									</div>
 
 									<ul class="card__meta">
-										<li><span>Genre:</span> <a href="#">Action</a>
-										<a href="#">Triler</a></li>
-										<li><span>Release year:</span> 2017</li>
-										<li><span>Running time:</span> 120 min</li>
-										<li><span>Country:</span> <a href="#">USA</a> </li>
+										<li><span>Genre:</span>
+										@foreach($artikel->tag as $item)
+                                    		<a href="#">{{ $item->name }}</a>
+                            			@endforeach
+										<li><span>Release year:</span> {{ $artikel->rilis->nama }}</li>
+										<li><span>Running time:</span> {{ $artikel->durasi }} min</li>
+										<li><span>Country:</span>
+										@foreach($artikel->negara as $item)
+                                    		<a href="#">{{ $item->name }}</a>
+                            			@endforeach
 									</ul>
 
 									<div class="card__description card__description--details">
-										It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+										{!! $artikel->konten !!}
 									</div>
 								</div>
 							</div>
@@ -99,21 +104,7 @@
 
 				<!-- player -->
 				<div class="col-12 col-xl-6">
-					<video controls crossorigin playsinline poster="../../../cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
-						<!-- Video files -->
-						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
-						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
-						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
-						<source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1440p.mp4" type="video/mp4" size="1440">
-
-						<!-- Caption files -->
-						<track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
-						    default>
-						<track kind="captions" label="Français" srclang="fr" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt">
-
-						<!-- Fallback for browsers that don't support the <video> element -->
-						<a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>
-					</video>
+				<iframe width="560" height="315" src="{{ $artikel->embed }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				</div>
 				<!-- end player -->
 
@@ -171,9 +162,7 @@
 								<a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Reviews</a>
 							</li>
 
-							<li class="nav-item">
-								<a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Photos</a>
-							</li>
+							
 						</ul>
 						<!-- end content tabs nav -->
 
@@ -190,7 +179,7 @@
 
 									<li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Reviews</a></li>
 
-									<li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Photos</a></li>
+									
 								</ul>
 							</div>
 						</div>
@@ -371,68 +360,6 @@
 								<!-- end reviews -->
 							</div>
 						</div>
-
-						<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
-							<!-- project gallery -->
-							<div class="gallery" itemscope>
-								<div class="row">
-									<!-- gallery item -->
-									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
-										<a href="img/gallery/project-1.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="/assets/front/img/gallery/project-1.jpg" itemprop="thumbnail" alt="Image description" />
-										</a>
-										<figcaption itemprop="caption description">Some image caption 1</figcaption>
-									</figure>
-									<!-- end gallery item -->
-
-									<!-- gallery item -->
-									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
-										<a href="img/gallery/project-2.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="/assets/front/img/gallery/project-2.jpg" itemprop="thumbnail" alt="Image description" />
-										</a>
-										<figcaption itemprop="caption description">Some image caption 2</figcaption>
-									</figure>
-									<!-- end gallery item -->
-
-									<!-- gallery item -->
-									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
-										<a href="img/gallery/project-3.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="/assets/front/img/gallery/project-3.jpg" itemprop="thumbnail" alt="Image description" />
-										</a>
-										<figcaption itemprop="caption description">Some image caption 3</figcaption>
-									</figure>
-									<!-- end gallery item -->
-
-									<!-- gallery item -->
-									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
-										<a href="img/gallery/project-4.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="/assets/front/img/gallery/project-4.jpg" itemprop="thumbnail" alt="Image description" />
-										</a>
-										<figcaption itemprop="caption description">Some image caption 4</figcaption>
-									</figure>
-									<!-- end gallery item -->
-
-									<!-- gallery item -->
-									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
-										<a href="img/gallery/project-5.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="/assets/front/img/gallery/project-5.jpg" itemprop="thumbnail" alt="Image description" />
-										</a>
-										<figcaption itemprop="caption description">Some image caption 5</figcaption>
-									</figure>
-									<!-- end gallery item -->
-
-									<!-- gallery item -->
-									<figure class="col-12 col-sm-6 col-xl-4" itemprop="associatedMedia" itemscope>
-										<a href="img/gallery/project-6.jpg" itemprop="contentUrl" data-size="1920x1280">
-											<img src="/assets/front/img/gallery/project-6.jpg" itemprop="thumbnail" alt="Image description" />
-										</a>
-										<figcaption itemprop="caption description">Some image caption 6</figcaption>
-									</figure>
-									<!-- end gallery item -->
-								</div>
-							</div>
-							<!-- end project gallery -->
-						</div>
 					</div>
 					<!-- end content tabs -->
 				</div>
@@ -447,129 +374,28 @@
 						<!-- end section title -->
 
 						<!-- card -->
+						@foreach ($artikel1 as $data)
 						<div class="col-6 col-sm-4 col-lg-6">
 							<div class="card">
 								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover.jpg" alt="">
-									<a href="#" class="card__play">
+									<img src="{{ asset('assets/img/artikel/'.$data->foto)}}" alt="">
+									<a href="{{ $data->slug }}" class="card__play">
 										<i class="icon ion-ios-play"></i>
 									</a>
 								</div>
 								<div class="card__content">
-									<h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
+									<h3 class="card__title"><a href="{{ $data->slug }}">{{ $data->judul }}</a></h3>
 									<span class="card__category">
-										<a href="#">Action</a>
-										<a href="#">Triler</a>
+										@foreach($data->tag as $item)
+                                    		<a href="#">{{ $item->name }}</a>
+                            			@endforeach
 									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+									<span class="card__rate"><i class="icon ion-ios-star"></i>{{ $data->rating }}</span>
 								</div>
 							</div>
 						</div>
 						<!-- end card -->
-
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-6">
-							<div class="card">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover2.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Benched</a></h3>
-									<span class="card__category">
-										<a href="#">Comedy</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-6">
-							<div class="card">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover3.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Whitney</a></h3>
-									<span class="card__category">
-										<a href="#">Romance</a>
-										<a href="#">Drama</a>
-										<a href="#">Music</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>6.3</span>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-6">
-							<div class="card">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover4.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Blindspotting</a></h3>
-									<span class="card__category">
-										<a href="#">Comedy</a>
-										<a href="#">Drama</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>7.9</span>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-6">
-							<div class="card">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover5.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
-									<span class="card__category">
-										<a href="#">Action</a>
-										<a href="#">Triler</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
-
-						<!-- card -->
-						<div class="col-6 col-sm-4 col-lg-6">
-							<div class="card">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover6.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Benched</a></h3>
-									<span class="card__category">
-										<a href="#">Comedy</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
-								</div>
-							</div>
-						</div>
-						<!-- end card -->
+						@endforeach
 					</div>
 				</div>
 				<!-- end sidebar -->

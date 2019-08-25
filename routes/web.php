@@ -16,12 +16,11 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/faq', function () {
         return view('front.faq');
     });
-    Route::get('/detail', function () {
-        return view('front.details1');
+    Route::get('/catalog', 'FrontController@catalog')->name('catalog2');
+    Route::get('/about', function () {
+        return view('front.about');
     });
-    Route::get('/catalog', function () {
-        return view('front.catalog2');
-    });
+    Route::get('/{artikel}', 'FrontController@detailblog')->name('details1');
 });
 
 Auth::routes();

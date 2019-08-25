@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Tags</label>
+            <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Country</label>
             <div class="col-sm-12 col-md-10">
                 <select class="form-control selectric" name="negara[]" multiple>
                     {{--  <option value="">- Pilih Country -</option>  --}}
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Tags</label>
+            <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Genre</label>
             <div class="col-sm-12 col-md-10">
                 <select class="form-control selectric" name="tag[]" multiple>
                     {{--  <option value="">- Pilih Genre -</option>  --}}
@@ -110,6 +110,19 @@
                 @if ($errors->has('durasi'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('durasi') }}</strong>
+                    </span>
+                @endif
+                </div>
+            </div>
+
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Embed Youtube</label>
+                <div class="col-sm-12 col-md-10">
+                    <input name="embed" value="{{ $artikel->embed }}" type="text" class="form-control{{ $errors->has('embed') ? ' is-invalid' : '' }}">
+
+                @if ($errors->has('embed'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('embed') }}</strong>
                     </span>
                 @endif
                 </div>

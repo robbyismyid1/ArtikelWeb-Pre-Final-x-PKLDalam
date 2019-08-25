@@ -62,88 +62,30 @@
 
 				<div class="col-12">
 					<div class="owl-carousel home__carousel">
+						@foreach($artikel as $data)
 						<div class="item">
 							<!-- card -->
 							<div class="card card--big">
 								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover.jpg" alt="">
-									<a href="#" class="card__play">
+									<img src="{{ asset('assets/img/artikel/'.$data->foto)}}" style="height: 400px;" alt="">
+									<a href="{{ $data->slug }}" class="card__play">
 										<i class="icon ion-ios-play"></i>
 									</a>
 								</div>
 								<div class="card__content">
-									<h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
+									<h3 class="card__title"><a href="{{ $data->slug }}">{{ $data->judul }}</a></h3>
 									<span class="card__category">
-										<a href="#">Action</a>
-										<a href="#">Triler</a>
+										@foreach($data->tag as $item)
+                                    		<a href="#">{{ $item->name }}</a>
+                            			@endforeach
 									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+									<span class="card__rate"><i class="icon ion-ios-star"></i>{{ $data->rating }}</span>
 								</div>
 							</div>
 							<!-- end card -->
 						</div>
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover2.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Benched</a></h3>
-									<span class="card__category">
-										<a href="#">Comedy</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover3.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Whitney</a></h3>
-									<span class="card__category">
-										<a href="#">Romance</a>
-										<a href="#">Drama</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>6.3</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
-
-						<div class="item">
-							<!-- card -->
-							<div class="card card--big">
-								<div class="card__cover">
-									<img src="/assets/front/img/covers/cover4.jpg" alt="">
-									<a href="#" class="card__play">
-										<i class="icon ion-ios-play"></i>
-									</a>
-								</div>
-								<div class="card__content">
-									<h3 class="card__title"><a href="#">Blindspotting</a></h3>
-									<span class="card__category">
-										<a href="#">Comedy</a>
-										<a href="#">Drama</a>
-									</span>
-									<span class="card__rate"><i class="icon ion-ios-star"></i>7.9</span>
-								</div>
-							</div>
-							<!-- end card -->
-						</div>
+							@endforeach
+							
 					</div>
 				</div>
 			</div>
@@ -211,7 +153,7 @@
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
 					<div class="row">
-						@foreach($artikel as $data)
+						@foreach($artikel1 as $data)
 						<!-- card -->
 						<div class="col-6 col-sm-12 col-lg-6">
 							<div class="card card--list">
@@ -219,7 +161,7 @@
 									<div class="col-12 col-sm-4">
 										<div class="card__cover">
 											<img src="{{ asset('assets/img/artikel/'.$data->foto)}}" style="height: 250px; width: 150px" alt="">
-											<a href="#" class="card__play">
+											<a href="{{ $data->slug }}" class="card__play">
 												<i class="icon ion-ios-play"></i>
 											</a>
 										</div>
@@ -227,7 +169,7 @@
 
 									<div class="col-12 col-sm-8">
 										<div class="card__content">
-											<h3 class="card__title"><a href="detail">{{ $data->judul }}</a></h3>
+											<h3 class="card__title"><a href="{{ $data->slug }}">{{ $data->judul }}</a></h3>
 											<span class="card__category">
 											@foreach($data->tag as $item)
                                     			<a href="#">{{ $item->name }}</a>
@@ -235,7 +177,7 @@
 											</span>
 
 											<div class="card__wrap">
-												<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+												<span class="card__rate"><i class="icon ion-ios-star"></i>{{ $data->rating }}</span>
 
 												<ul class="card__list">
 													<a href="" style="color:white;">{{ $data->kategori->nama }}</a>
@@ -243,7 +185,8 @@
 											</div>
 
 											<div class="card__description">
-											<p> {!! substr($data->konten, 0, 150) .' . . . <br> <a href="detail">Read more</a>' !!} </p>
+											<p> {!! substr($data->konten, 0, 100) .' . . .  ' !!} </p>
+											<a href="{{$data->slug}}">Read more</a>
 											</div>
 										</div>
 									</div>
@@ -255,6 +198,7 @@
 
 						<!-- card -->
 					</div>
+						<center>{{ $artikel1->links('vendor.pagination.simple-default') }}</center>
 				</div>
 
 				<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
@@ -783,136 +727,32 @@
 					<h2 class="section__title">Expected premiere</h2>
 				</div>
 				<!-- end section title -->
-
+@foreach ($artikel2 as $data)
 				<!-- card -->
 				<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
 					<div class="card">
 						<div class="card__cover">
-							<img src="/assets/front/img/covers/cover.jpg" alt="">
-							<a href="#" class="card__play">
+							<img src="{{ asset('assets/img/artikel/'.$data->foto)}}" style="height: 250px " alt="">
+							<a href="{{ $data->slug }}" class="card__play">
 								<i class="icon ion-ios-play"></i>
 							</a>
 						</div>
 						<div class="card__content">
-							<h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
+							<h3 class="card__title"><a href="{{ $data->slug }}">{{ $data->judul }}</a></h3>
 							<span class="card__category">
-								<a href="#">Action</a>
-								<a href="#">Triler</a>
+								@foreach($data->tag as $item)
+                                    <a href="#">{{ $item->name }}</a>
+                            	@endforeach
 							</span>
-							<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
+							<span class="card__rate"><i class="icon ion-ios-star"></i>{{ $data->rating }}</span>
 						</div>
 					</div>
 				</div>
 				<!-- end card -->
-
-				<!-- card -->
-				<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
-					<div class="card">
-						<div class="card__cover">
-							<img src="/assets/front/img/covers/cover3.jpg" alt="">
-							<a href="#" class="card__play">
-								<i class="icon ion-ios-play"></i>
-							</a>
-						</div>
-						<div class="card__content">
-							<h3 class="card__title"><a href="#">Benched</a></h3>
-							<span class="card__category">
-								<a href="#">Comedy</a>
-							</span>
-							<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
-						</div>
-					</div>
-				</div>
-				<!-- end card -->
-
-				<!-- card -->
-				<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
-					<div class="card">
-						<div class="card__cover">
-							<img src="/assets/front/img/covers/cover2.jpg" alt="">
-							<a href="#" class="card__play">
-								<i class="icon ion-ios-play"></i>
-							</a>
-						</div>
-						<div class="card__content">
-							<h3 class="card__title"><a href="#">Whitney</a></h3>
-							<span class="card__category">
-								<a href="#">Romance</a>
-								<a href="#">Drama</a>
-								<a href="#">Music</a>
-							</span>
-							<span class="card__rate"><i class="icon ion-ios-star"></i>6.3</span>
-						</div>
-					</div>
-				</div>
-				<!-- end card -->
-
-				<!-- card -->
-				<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
-					<div class="card">
-						<div class="card__cover">
-							<img src="/assets/front/img/covers/cover6.jpg" alt="">
-							<a href="#" class="card__play">
-								<i class="icon ion-ios-play"></i>
-							</a>
-						</div>
-						<div class="card__content">
-							<h3 class="card__title"><a href="#">Blindspotting</a></h3>
-							<span class="card__category">
-								<a href="#">Comedy</a>
-								<a href="#">Drama</a>
-							</span>
-							<span class="card__rate"><i class="icon ion-ios-star"></i>7.9</span>
-						</div>
-					</div>
-				</div>
-				<!-- end card -->
-
-				<!-- card -->
-				<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
-					<div class="card">
-						<div class="card__cover">
-							<img src="/assets/front/img/covers/cover4.jpg" alt="">
-							<a href="#" class="card__play">
-								<i class="icon ion-ios-play"></i>
-							</a>
-						</div>
-						<div class="card__content">
-							<h3 class="card__title"><a href="#">I Dream in Another Language</a></h3>
-							<span class="card__category">
-								<a href="#">Action</a>
-								<a href="#">Triler</a>
-							</span>
-							<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
-						</div>
-					</div>
-				</div>
-				<!-- end card -->
-
-				<!-- card -->
-				<div class="col-6 col-sm-4 col-lg-3 col-xl-2">
-					<div class="card">
-						<div class="card__cover">
-							<img src="/assets/front/img/covers/cover5.jpg" alt="">
-							<a href="#" class="card__play">
-								<i class="icon ion-ios-play"></i>
-							</a>
-						</div>
-						<div class="card__content">
-							<h3 class="card__title"><a href="#">Benched</a></h3>
-							<span class="card__category">
-								<a href="#">Comedy</a>
-							</span>
-							<span class="card__rate"><i class="icon ion-ios-star"></i>7.1</span>
-						</div>
-					</div>
-				</div>
-				<!-- end card -->
+				@endforeach
 
 				<!-- section btn -->
-				<div class="col-12">
-					<a href="#" class="section__btn">Show more</a>
-				</div>
+				
 				<!-- end section btn -->
 			</div>
 		</div>
@@ -934,54 +774,6 @@
 					<p class="section__text section__text--last-with-margin">It is a long <b>established</b> fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.</p>
 				</div>
 				<!-- end section text -->
-
-				<!-- partner -->
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a href="#" class="partner">
-						<img src="/assets/front/img/partners/themeforest-light-background.png" alt="" class="partner__img">
-					</a>
-				</div>
-				<!-- end partner -->
-
-				<!-- partner -->
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a href="#" class="partner">
-						<img src="/assets/front/img/partners/audiojungle-light-background.png" alt="" class="partner__img">
-					</a>
-				</div>
-				<!-- end partner -->
-
-				<!-- partner -->
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a href="#" class="partner">
-						<img src="/assets/front/img/partners/codecanyon-light-background.png" alt="" class="partner__img">
-					</a>
-				</div>
-				<!-- end partner -->
-
-				<!-- partner -->
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a href="#" class="partner">
-						<img src="/assets/front/img/partners/photodune-light-background.png" alt="" class="partner__img">
-					</a>
-				</div>
-				<!-- end partner -->
-
-				<!-- partner -->
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a href="#" class="partner">
-						<img src="/assets/front/img/partners/activeden-light-background.png" alt="" class="partner__img">
-					</a>
-				</div>
-				<!-- end partner -->
-
-				<!-- partner -->
-				<div class="col-6 col-sm-4 col-md-3 col-lg-2">
-					<a href="#" class="partner">
-						<img src="/assets/front/img/partners/3docean-light-background.png" alt="" class="partner__img">
-					</a>
-				</div>
-				<!-- end partner -->
 			</div>
 		</div>
 	</section>

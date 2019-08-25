@@ -22,7 +22,7 @@
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Title</label>
                 <div class="col-sm-12 col-md-10">
-                    <input name="judul" type="text" class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}">
+                    <input name="judul" type="text" class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}" required>
 
                 @if ($errors->has('judul'))
                     <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
             <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Year Released</label>
             <div class="col-sm-12 col-md-10">
-              <select class="form-control selectric" name="rilis">
+              <select class="form-control selectric" name="rilis" required>
                     <option value="">- Pick Year -</option>
                 @foreach($year as $data)
                     <option value="{{ $data->id }}">{{ $data->nama }}</option>
@@ -62,7 +62,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Genre</label>
             <div class="col-sm-12 col-md-10">
-                <select class="form-control selectric" name="tag[]" multiple>
+                <select class="form-control selectric" name="tag[]" multiple >
                     {{--  <option value="">- Pilih Genre -</option>  --}}
                     @foreach ($tag as $data)
                         <option value="{{ $data->id }}">{{ $data->name }}</option>
@@ -79,7 +79,7 @@
           <div class="form-group row mb-4">
             <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Category</label>
             <div class="col-sm-12 col-md-10">
-              <select class="form-control selectric" name="kategori">
+              <select class="form-control selectric" name="kategori" required>
                     <option value="">- Pick Categories -</option>
                 @foreach($cat as $data)
                     <option value="{{ $data->id }}">{{ $data->nama }}</option>
@@ -90,7 +90,7 @@
           <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Rating</label>
                 <div class="col-sm-12 col-md-10">
-                    <input name="rating" type="number" class="form-control{{ $errors->has('rating') ? ' is-invalid' : '' }}">
+                    <input name="rating" type="number" step="any" class="form-control{{ $errors->has('rating') ? ' is-invalid' : '' }}" required>
 
                 @if ($errors->has('rating'))
                     <span class="invalid-feedback" role="alert">
@@ -102,11 +102,23 @@
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Duration</label>
                 <div class="col-sm-12 col-md-10">
-                    <input name="durasi" type="number" class="form-control{{ $errors->has('durasi') ? ' is-invalid' : '' }}">
+                    <input name="durasi" type="number" class="form-control{{ $errors->has('durasi') ? ' is-invalid' : '' }}" required>
 
                 @if ($errors->has('durasi'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('durasi') }}</strong>
+                    </span>
+                @endif
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">Embed Youtube</label>
+                <div class="col-sm-12 col-md-10">
+                    <input name="embed" type="text" class="form-control{{ $errors->has('embed') ? ' is-invalid' : '' }}" placeholder="ex : https://www.youtube.com/embed/RSXc5z9F7Do" required>
+
+                @if ($errors->has('embed'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('embed') }}</strong>
                     </span>
                 @endif
                 </div>

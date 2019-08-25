@@ -21,6 +21,7 @@ class CreateArtikelsTable extends Migration
             $table->string('durasi');
             $table->text('konten');
             $table->string('foto');
+            $table->string('embed');
             $table->boolean('status')->default(true);
             $table->integer('kategori_id')->unsigned();
             $table->integer('rilis_id')->unsigned();

@@ -8,6 +8,7 @@ use App\Kategori;
 use App\Tag;
 use App\Rilis;
 use App\Negara;
+use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -68,6 +69,7 @@ class ArtikelController extends Controller
         $artikel->judul = $request->judul;
         $artikel->slug = str_slug($request->judul);
         $artikel->konten = $request->konten;
+        $artikel->embed = $request->embed;
         $artikel->rating = $request->rating;
         $artikel->durasi = $request->durasi;
         $artikel->user_id = Auth::user()->id;
@@ -143,6 +145,7 @@ class ArtikelController extends Controller
         $artikel->judul = $request->judul;
         $artikel->slug = str_slug($request->judul);
         $artikel->konten = $request->konten;
+        $artikel->embed = $request->embed;
         $artikel->rating = $request->rating;
         $artikel->durasi = $request->durasi;
         $artikel->user_id = Auth::user()->id;
